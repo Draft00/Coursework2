@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include<ctype.h>
 #include <stdlib.h>
@@ -36,7 +36,7 @@ void xor_cypher()
 		return;
 	}
 
-	printf("Введите пароль: ");
+	printf("Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ: ");
 	getchar();
 	gets(password);
 
@@ -60,11 +60,11 @@ void xor_cypher()
 int menu()
 {
 	int num = 0;
-	printf("\nКакие действия Вы желаете выполнить?\n");
-	printf("Для совершения действия выберите соответствующую цифру:\n");
-	printf("1. Заксорить.\n");
-	printf("2. Найти длину ключа и сам ключ. Печать получившегося текста в файл.\n");
-	printf("3. Выход.\n");
+	printf("\nРљР°РєРёРµ РґРµР№СЃС‚РІРёСЏ Р’С‹ Р¶РµР»Р°РµС‚Рµ РІС‹РїРѕР»РЅРёС‚СЊ?\n");
+	printf("Р”Р»СЏ СЃРѕРІРµСЂС€РµРЅРёСЏ РґРµР№СЃС‚РІРёСЏ РІС‹Р±РµСЂРёС‚Рµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С†РёС„СЂСѓ:\n");
+	printf("1. Р—Р°РєСЃРѕСЂРёС‚СЊ.\n");
+	printf("2. РќР°Р№С‚Рё РґР»РёРЅСѓ РєР»СЋС‡Р° Рё СЃР°Рј РєР»СЋС‡. РџРµС‡Р°С‚СЊ РїРѕР»СѓС‡РёРІС€РµРіРѕСЃСЏ С‚РµРєСЃС‚Р° РІ С„Р°Р№Р».\n");
+	printf("3. Р’С‹С…РѕРґ.\n");
 	if (!scanf("%d", &num))
 	{
 		fflush(stdin);
@@ -162,7 +162,7 @@ int key_size(unsigned char shifr_text[], int size, float key_long[])
 }
 
 unsigned char frequency[] = " etaoinshrdlcumwfgypbvkxjqz";
-unsigned char alphabet[] = " etaoinshrdlcumwfgypbvkxjqzETAOINSHRDLCUMWFGYPBVKXJQZ1234567890!_№;%:?*()-=+&^$#@";
+unsigned char alphabet[] = " etaoinshrdlcumwfgypbvkxjqzETAOINSHRDLCUMWFGYPBVKXJQZ1234567890!_в„–;%:?*()-=+&^$#@";
 
 int is_it_char(char c)
 {
@@ -179,21 +179,21 @@ void if_need_correct()
 	int choise = 5;
 	while (choise)
 	{
-		printf("\n\nЕсли ключ уже был найден верно, введите 0. Иначе введите 1 и результат будет подкорректирован.\n");
+		printf("\n\nР•СЃР»Рё РєР»СЋС‡ СѓР¶Рµ Р±С‹Р» РЅР°Р№РґРµРЅ РІРµСЂРЅРѕ, РІРІРµРґРёС‚Рµ 0. РРЅР°С‡Рµ РІРІРµРґРёС‚Рµ 1 Рё СЂРµР·СѓР»СЊС‚Р°С‚ Р±СѓРґРµС‚ РїРѕРґРєРѕСЂСЂРµРєС‚РёСЂРѕРІР°РЅ.\n");
 		{
 			scanf("%d", &choise);
 		}
 		if (choise == 0)
 		{
-			printf("Завершение работы.");
+			printf("Р—Р°РІРµСЂС€РµРЅРёРµ СЂР°Р±РѕС‚С‹.");
 		}
 		else
 		{
-			printf("Выберите длину ключа, которая, по Вашему мнению, наиболее подходящая.\n");
+			printf("Р’С‹Р±РµСЂРёС‚Рµ РґР»РёРЅСѓ РєР»СЋС‡Р°, РєРѕС‚РѕСЂР°СЏ, РїРѕ Р’Р°С€РµРјСѓ РјРЅРµРЅРёСЋ, РЅР°РёР±РѕР»РµРµ РїРѕРґС…РѕРґСЏС‰Р°СЏ.\n");
 			int your_kSize = 0;
 			unsigned char your_key[50] = { 0 }, kkey[50] = { 0 };
 			scanf("%d", &your_kSize);
-			printf("Введите несколько ПЕРВЫХ символов текста (достаточно количества, равного длине ключа), который, по вашему мнению, должен был получиться.\n");
+			printf("Р’РІРµРґРёС‚Рµ РЅРµСЃРєРѕР»СЊРєРѕ РџР•Р Р’Р«РҐ СЃРёРјРІРѕР»РѕРІ С‚РµРєСЃС‚Р° (РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РєРѕР»РёС‡РµСЃС‚РІР°, СЂР°РІРЅРѕРіРѕ РґР»РёРЅРµ РєР»СЋС‡Р°), РєРѕС‚РѕСЂС‹Р№, РїРѕ РІР°С€РµРјСѓ РјРЅРµРЅРёСЋ, РґРѕР»Р¶РµРЅ Р±С‹Р» РїРѕР»СѓС‡РёС‚СЊСЃСЏ.\n");
 			getchar();
 			gets(your_key);
 			unsigned char c;
@@ -481,14 +481,14 @@ void show_result(unsigned char *tmp_key, int want, int sizetext, int currentMax)
 {
 	int needsize = need_size(want, sizetext);
 
-	printf("Коэффициент \"хороших соседей\" = %d \n", currentMax);
-	printf("Предполагаемый ключ: ");
+	printf("РљРѕСЌС„С„РёС†РёРµРЅС‚ \"С…РѕСЂРѕС€РёС… СЃРѕСЃРµРґРµР№\" = %d \n", currentMax);
+	printf("РџСЂРµРґРїРѕР»Р°РіР°РµРјС‹Р№ РєР»СЋС‡: ");
 	for (int j = 0; j < kSize; j++)
 	{
 		printf("%c", tmp_key[j]);
 	}
 	printf("\n");
-	printf("Текст: \n");
+	printf("РўРµРєСЃС‚: \n");
 	for (int j = 0; j < needsize; j++)
 	{
 		printf("%c", tmp_shifr_text[j]);
@@ -514,15 +514,15 @@ void BruteForce(unsigned char* key, unsigned char* hu, int size, int number, int
 		{
 			/*int needsize = need_size(100, sizetext);
 			
-			printf("Коэффициент \"хороших соседей\" = %d \n", currentMax);
-			printf("Предполагаемый ключ: ");
+			printf("РљРѕСЌС„С„РёС†РёРµРЅС‚ \"С…РѕСЂРѕС€РёС… СЃРѕСЃРµРґРµР№\" = %d \n", currentMax);
+			printf("РџСЂРµРґРїРѕР»Р°РіР°РµРјС‹Р№ РєР»СЋС‡: ");
 			for (int j = 0; j < kSize; j++)
 			{
 				printf("%c", hu[j]);
 			}
 			
 			printf("\n");
-			printf("Текст: \n");
+			printf("РўРµРєСЃС‚: \n");
 			for (int j = 0; j < needsize; j++)
 			{
 				printf("%c", tmp_shifr_text[j]);
