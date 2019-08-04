@@ -368,105 +368,8 @@ int analysis_bin(unsigned char* tempkey, int sizetext)
 	return tmp_count_bin;
 }
 
-int analysis(unsigned char* tempkey, int sizetext)
-{
-	int needsize;
-	if (sizetext < 100)
-	{
-		needsize = sizetext;
-	}
-	else needsize = 100;
-	for (int j = 0; j < needsize; j++)
-	{
-		tmp_shifr_text[j] = shifr_text[j] ^ tempkey[j % kSize];
-		//printf("%c", tmp_shifr_text[j]);
-	}
-	//printf("\n\n");
-	for (int j = 1; j < needsize - 1; j++)
-	{
-		if ((tmp_shifr_text[j] >= '0' && tmp_shifr_text[j] <= '9') || tmp_shifr_text[j] == '%' || tmp_shifr_text[j] == '+' || tmp_shifr_text[j] == '-')
-		{
-			if (isalpha(tmp_shifr_text[j + 1]) && isalpha(tmp_shifr_text[j - 1]))
-			{
-				return 0;
-			}
-		}
-		else if (tmp_shifr_text[j] == '>' || tmp_shifr_text[j] == '<')
-		{
-			if (isalpha(tmp_shifr_text[j - 1]) || isalpha(tmp_shifr_text[j + 1]))
-			{
-				return 0;
-			}
-		}
-		else if (tmp_shifr_text[j] == '!' || tmp_shifr_text[j] == ',' || tmp_shifr_text[j] == '.' || tmp_shifr_text[j] == '?')
-		{
-			if (!isalpha(tmp_shifr_text[j - 1]) && !(tmp_shifr_text[j - 1] >= '0' && tmp_shifr_text[j - 1] <= '9'))
-			{
-				return 0;
-			}
-			if (tmp_shifr_text[j + 1] != ' ' && tmp_shifr_text[j + 1] != '\n')
-			{
-				return 0;
-			}
-
-		}
-		else if (tmp_shifr_text[j] == '&')
-		{
-			if (!(tmp_shifr_text[j + 1] >= 'A' && tmp_shifr_text[j + 1] <= 'Z'))
-			{
-				return 0;
-			}
-			if (!isalpha(tmp_shifr_text[j - 1]))
-			{
-				return 0;
-			}
-		}
-		else if (tmp_shifr_text[j] == ')')
-		{
-			if (isalpha(tmp_shifr_text[j + 1]))
-			{
-				return 0;
-			}
-		}
-		else if (tmp_shifr_text[j] == '(' || tmp_shifr_text[j] == '#')
-		{
-			if (tmp_shifr_text[j - 1] != ' ')
-			{
-				return 0;
-			}
-		}
-		else if (tmp_shifr_text[j] == '$')
-		{
-			if (tmp_shifr_text[j - 1] != ' ')
-			{
-				return 0;
-			}
-			if (!(tmp_shifr_text[j + 1] >= '0' && tmp_shifr_text[j + 1] <= '9'))
-			{
-				return 0;
-			}
-
-		}
-		else if (tmp_shifr_text[j] == '"' || tmp_shifr_text[j] == '\'')
-		{
-			if (tmp_shifr_text[j - 1] != ' ' && tmp_shifr_text[j + 1] != ' ')
-			{
-				return 0;
-			}
-		}
-		else if (isalpha(tmp_shifr_text[j]) && (tmp_shifr_text[j] == tmp_shifr_text[j - 1]) && (tmp_shifr_text[j] == tmp_shifr_text[j + 1]))
-		{
-			return 0;
-		}
-
-	}
-	printf("\n\n");
-	return 1;
-
-}
 
 int Max = 0;
-char* kk = "helloworld";
 
 int need_size(int want, int sizetext)
 {
@@ -497,13 +400,12 @@ void show_result(unsigned char *tmp_key, int want, int sizetext, int currentMax)
 
 }
 
-int gl_count = 0;
+
 void BruteForce(unsigned char* key, unsigned char* hu, int size, int number, int sizetext)
 {
 	if (size == 0)
 	{
-		//gl_count++;
-		//printf("%d\n", gl_count);
+
 		if (strcmp(hu, kk) == 0)
 		{
 			printf("YES");
@@ -512,22 +414,6 @@ void BruteForce(unsigned char* key, unsigned char* hu, int size, int number, int
 		int currentMax = analysis_bin(hu, sizetext);
 		if (currentMax > Max)
 		{
-			/*int needsize = need_size(100, sizetext);
-			
-			printf("Коэффициент \"хороших соседей\" = %d \n", currentMax);
-			printf("Предполагаемый ключ: ");
-			for (int j = 0; j < kSize; j++)
-			{
-				printf("%c", hu[j]);
-			}
-			
-			printf("\n");
-			printf("Текст: \n");
-			for (int j = 0; j < needsize; j++)
-			{
-				printf("%c", tmp_shifr_text[j]);
-			}
-			printf("\n");*/
 			show_result(hu, 100, sizetext, currentMax);
 
 			Max = currentMax;
@@ -536,22 +422,6 @@ void BruteForce(unsigned char* key, unsigned char* hu, int size, int number, int
 		{
 			show_result(hu, 100, sizetext, currentMax);
 		}
-		
-		/*
-		if (analysis(hu, sizetext))
-		{
-			for (int j = 0; j < kSize; j++)
-			{
-				printf("%c", hu[j]);
-			}
-			printf("----KEY!!");
-			printf("\n");
-			for (int j = 0; j < 100; j++)
-			{
-				printf("%c", tmp_shifr_text[j]);
-			}
-
-		}*/
 		
 		return;
 	}
@@ -628,8 +498,7 @@ void print(unsigned char* key, int length)
 		printf("Cant read file!\n");
 		return;
 	}
-	//for (int i = 0; i < length; i++)
-		//printf("%d - %c", key[i], key[i]);
+
 	int c = fgetc(fin);
 	while (c != EOF)
 	{
@@ -690,17 +559,6 @@ int main()
 		count_for_Brut = 5;
 	}
 	unsigned char key[50] = { 0 };
-	//unsigned char* key = (unsigned char*)malloc(maxKsize * sizeof(unsigned char));
-	//memset(key, 0, maxKsize);
-
-	/*kSize = 10;
-	count_for_Brut = 5;
-	get_key(shifr_text, size, key, 10);*/
-
-	//kSize = 10;
-	/*int ty = analysis_bin("helloworld", size);
-	printf("%d", ty);
-	*/
 	
 	int n = menu();
 	while (n != 4)
@@ -747,7 +605,6 @@ int main()
 	
 	free(shifr_text);
 	free(tmp_shifr_text);
-	//free(key);
 	
 	return 0;
 }
